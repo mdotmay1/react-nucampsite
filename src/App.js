@@ -1,8 +1,7 @@
-
-import CampsitesList from './features/campsites/CampsitesList.js';
-
 import Header from './components/Header';
 import Footer from './components/Footer';
+//import CampsitesList from './features/campsites/CampsitesList.js';   replaced with CampsiteDirectoryPage
+import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,7 +11,8 @@ import './App.css';
     return (
       <div className='App'>
           <Header />
-          <CampsitesList />
+          {/* <CampsitesList /> */}
+          <CampsitesDirectoryPage />
           <Footer />
       </div>
     );
