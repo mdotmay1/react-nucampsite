@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
 import CampsiteDetailPage from './pages/CampsiteDetailPage';
+import AboutUsPage from './pages/AboutPage';
+
 //import logo from './logo.svg';
 import './App.css';
 
@@ -20,6 +22,7 @@ import './App.css';
               <Route path='/' element={<HomePage />} />
               <Route path='contact' element={<ContactPage />} />
               <Route path='directory' element={<CampsitesDirectoryPage />} />
+              <Route path='about' element={<AboutUsPage />} />
               <Route
                 path='directory/:campsiteId'
                 element={<CampsiteDetailPage />}
