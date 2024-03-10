@@ -3,9 +3,9 @@ import ContactPage from './pages/ContactPage';
 import HomePage from './pages/HomePage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-//import CampsitesList from './features/campsites/CampsitesList.js';   replaced with CampsiteDirectoryPage
 import CampsitesDirectoryPage from './pages/CampsitesDirectoryPage';
-import logo from './logo.svg';
+import CampsiteDetailPage from './pages/CampsiteDetailPage';
+//import logo from './logo.svg';
 import './App.css';
 
 
@@ -20,6 +20,10 @@ import './App.css';
               <Route path='/' element={<HomePage />} />
               <Route path='contact' element={<ContactPage />} />
               <Route path='directory' element={<CampsitesDirectoryPage />} />
+              <Route
+                path='directory/:campsiteId'
+                element={<CampsiteDetailPage />}
+              />
           </Routes>
           <Footer />
       </div>
