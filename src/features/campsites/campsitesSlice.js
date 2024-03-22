@@ -1,7 +1,19 @@
 // This filename starts w/ lowercase because it doesn't export a component.
 // central space to handle all logic that pertains to global campsite data
 
+import { createSlice } from '@reduxjs/toolkit';
 import { CAMPSITES } from '../../app/shared/CAMPSITES';
+
+const initialState = {
+    campsitesArray: CAMPSITES
+};
+
+const campsitesSlice = createSlice({
+    name: 'campsites',
+    initialState
+});
+
+export const campsitesReducer = campsitesSlice.reducer;
 
 export const selectAllCampsites = () => {
     return CAMPSITES;
