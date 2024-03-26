@@ -10,7 +10,7 @@ const commentsSlice = createSlice({
     initialState
 });
 
-export const commentsReducer = commentsSlice.reducer;
+export const commentsReducer = commentsSlice.reducer;  //export so that it can be imported into the redux store later
 
 // export const selectCommentsByCampsiteId = (campsiteId) => {
 //     return COMMENTS.filter((comment) => comment.campsiteId === parseInt(campsiteId));
