@@ -1,31 +1,18 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, FormGroup, Label } from 'reactstrap';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { validateCommentForm } from '../../utils/validateCommentForm';
-
+import { addComment } from './commentsSlice';
 
 
 const CommentForm = ({ campsiteId }) => {
     
-    /* TASK 1: In the component body, use array destructuring syntax to destructure modalOpen and setModalOpen from a call to the useState() hook. 
-       Initialize the modalOpen variable's value to false by passing that value as an argument to useState(). */
+
     const [modalOpen, setModalOpen] = useState(false);
 
-    /* TASK 2: 
+    const dispatch = useDispatch();
 
-        Above the return statement of the CommentForm component, declare an arrow function named handleSubmit, using const.
-        Give it a single parameter of values.
-        In the arrow function body, declare a const named comment and initialize its value to the following object:
-        {
-            campsiteId: parseInt(campsiteId),
-            rating: values.rating,
-            author: values.author,
-            text: values.commentText
-        };
-        Below this, still inside the handleSubmit function body, log the comment object to the console.
-        Then call setModalOpen with a value of false to update the modalOpen state, which should have the effect of closing the modal at the end of this function's execution.
-
-    */
     const handleSubmit = (values) => {
         const comment =
             {
@@ -33,8 +20,10 @@ const CommentForm = ({ campsiteId }) => {
                 rating: values.rating,
                 author: values.author,
                 text: values.commentText,
+                date: new Date(Date.now()).toISOString()
             };
             console.log(comment);
+            dispatch(addComment(comment));
             setModalOpen(false);
     };
 
