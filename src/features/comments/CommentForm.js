@@ -39,9 +39,7 @@ const CommentForm = ({ campsiteId }) => {
 
              <Modal isOpen={modalOpen}>
                 <ModalHeader toggle={() => setModalOpen(false)}>Add Comment</ModalHeader>
-                    <ModalBody>
-                        {/*campsite: {campsiteId}  removed in Task 2*/}
-                    
+                    <ModalBody>                    
                         <Formik 
                             initialValues={{
                                 rating: undefined,
