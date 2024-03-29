@@ -24,8 +24,6 @@ import './App.css';
     return (
       <div className='App'>
           <Header />
-          {/* <CampsitesList /> REMOVED WHEN WE PUT IN THE CAPSITESDIRECTORYPAGE */}
-          {/* <CampsitesDirectoryPage /> REMOVED WHEN WE PUT IN ROUTES*/}
           <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='contact' element={<ContactPage />} />
