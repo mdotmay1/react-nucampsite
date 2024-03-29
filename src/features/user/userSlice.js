@@ -29,6 +29,13 @@ NOT SURE I UNDERSTAND THE DIFFERENCE BETWEEN THE TWO.
 GOT A CLUE FROM how selectFeaturePartner is exported from partnersSlice.js
 on how to correct it.
 
+INSTRUCTOR FEEDBACK:
+
+userSlice.js Line 21: Mmm, yes, this is a confusing bit. Were you there in class when we talked about the difference between 
+a selector and a selector creator? You could check out the Workshop slides to see the difference. When it's a function that 
+returns a function, it's a selector creator and needs to be used that way. If you write it as a selector creator but use it 
+as a plain selector, you'll get an issue, like you saw. Let me know if you have more questions on this! :)
+
 */
 
 export const selectCurrentUser = (state) => {

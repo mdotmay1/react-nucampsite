@@ -1,39 +1,55 @@
-// This filename starts w/ lowercase because it doesn't export a component.
-// central space to handle all logic that pertains to global campsite data
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import { CAMPSITES } from '../../app/shared/CAMPSITES';
+import { baseUrl } from '../../app/shared/baseUrl';
+import { mapImageURL } from '../../utils/mapImageURL';
 
-import { createSlice } from '@reduxjs/toolkit';
-import { CAMPSITES } from '../../app/shared/CAMPSITES';
+export const fetchCampsites = createAsyncThunk(
+    'campsites/fetchCampsites',
+    async () => {
+        const response = await fetch(baseUrl + 'campsites');
+        if (!response.ok) {
+            return Promise.reject('Unable to fetch, status: ' + response.status);
+        }
+        const data = await response.json();
+        return data;
+    }
+);
+
 
 const initialState = {
-    campsitesArray: CAMPSITES
+    campsitesArray: [],
+    isLoading: true,
+    errMsg: ''
 };
 
 const campsitesSlice = createSlice({
     name: 'campsites',
-    initialState
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [fetchCampsites.pending]: (state) => {
+            state.isLoading = true;
+        },
+        [fetchCampsites.fulfilled]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = '';
+            state.campsitesArray = mapImageURL(action.payload);
+        },
+        [fetchCampsites.rejected]: (state, action) => {
+            state.isLoading = false;
+            state.errMsg = action.error ? action.error.messgae: 'Fetch failed';
+        }
+    }
 });
 
 export const campsitesReducer = campsitesSlice.reducer;
 
-/*
-export const selectAllCampsites = () => {
-    return CAMPSITES;
-};
-*/
+
 
 export const selectAllCampsites = (state) => {
     return state.campsites.campsitesArray;
 };
 
-
-export const selectRandomCampsite = (state) => {
-    return CAMPSITES[Math.floor(CAMPSITES.length * Math.random())];
-};
-
-
-// export const selectCampsiteById = (id) => {
-//     return CAMPSITES.find((campsite) => campsite.id === parseInt(id));
-// };
 
 export const selectCampsiteById = (id) => (state) => {
         return state.campsites.campsitesArray.find(
@@ -41,11 +57,18 @@ export const selectCampsiteById = (id) => (state) => {
         );
     };
 
-
-// export const selectFeaturedCampsite = () => {
-//     return CAMPSITES.find((campsite) => campsite.featured);
-// };
-
 export const selectFeaturedCampsite = (state) => {
     return state.campsites.campsitesArray.find((campsite) => campsite.featured);
 };
+
+
+
+
+
+
+
+
+// ***********************************************************************************
+// export const selectRandomCampsite = (state) => {
+//     return CAMPSITES[Math.floor(CAMPSITES.length * Math.random())];
+// };
