@@ -10,6 +10,7 @@ import CampsiteDetailPage from './pages/CampsiteDetailPage';
 import AboutUsPage from './pages/AboutPage';
 import { fetchCampsites } from './features/campsites/campsitesSlice';
 import { fetchPartners } from './features/partners/partnersSlice';
+import { fetchPromotions } from './features/promotions/promotionsSlice';
 //import logo from './logo.svg';
 import './App.css';
 
@@ -21,6 +22,7 @@ import './App.css';
     useEffect(() => {
       dispatch(fetchCampsites());
       dispatch(fetchPartners());
+      dispatch(fetchPromotions());
     }, [dispatch]);
 
     return (
