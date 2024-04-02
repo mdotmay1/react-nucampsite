@@ -19,6 +19,25 @@ export const fetchComments = createAsyncThunk(
     }
 );
 
+export const postComment = createAsyncThunk(
+    'comments/postComment'
+    ,async (comment, { dispatch }) => {
+        const response = await fetch(
+            baseUrl + 'comments',
+            {
+                method: 'POST',
+                body: JSON.stringify(comment),
+                headers:  { 'Content-Type': 'application/json' }
+            } 
+        );
+        if (!response.ok) {
+            return Promise.reject(response.status);
+        }
+        const data = await response.json();
+        dispatch(addComment(data));
+    }
+);
+
 const initialState = {
     commentsArray: [],
     isLoading: true,
@@ -29,19 +48,19 @@ const initialState = {
 const commentsSlice = createSlice({
     name: 'comments',
     initialState,
-    reducers: {},
-    // reducers: {
-    //     addComment: (state, action) => {
-    //         console.log('addComment action.paylaod:', action.payload);
-    //         console.log('addComment state.commentsArray:', state.commentsArray);
-    //         const newComment = {
-    //             id: state.commentsArray.length + 1,
-    //             ...action.payload
-    //         };
-    //         state.commentsArray.push(newComment);
+    // reducers: {},
+    reducers: {
+        addComment: (state, action) => {
+            console.log('addComment action.paylaod:', action.payload);
+            console.log('addComment state.commentsArray:', state.commentsArray);
+            const newComment = {
+                id: state.commentsArray.length + 1,
+                ...action.payload
+            };
+            state.commentsArray.push(newComment);
             
-    //     }
-    // },
+        }
+    },
     extraReducers: {
         [fetchComments.pending]: (state) => {
             state.isLoading = true;
@@ -54,6 +73,12 @@ const commentsSlice = createSlice({
         [fetchComments.rejected]: (state, action) => {
             state.isLoading = false;
             state.errMsg = action.error ? action.error.message : 'Fetch failed';
+        },
+        [postComment.rejected]: (state, action) => {
+            alert(
+                'Your comment could not be posted\nError: ' +
+                (action.error ? action.error.message : 'Fetch failed')
+            );
         }
     }
 });
