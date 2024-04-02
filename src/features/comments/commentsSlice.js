@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import { COMMENTS } from '../../app/shared/COMMENTS';
 import { baseUrl } from '../../app/shared/baseUrl';
-import { mapImageURL } from '../../utils/mapImageURL';
 
 // const initialState = {
 //     commentsArray: COMMENTS
@@ -48,7 +47,7 @@ const commentsSlice = createSlice({
             state.isLoading = true;
         },
         [fetchComments.fulfilled]: (state, action) => {
-            state.isLoading = true;
+            state.isLoading = false;
             state.errMsg = '';
             state.commentsArray = action.payload;
         },

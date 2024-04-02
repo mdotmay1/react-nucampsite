@@ -17,7 +17,7 @@ export const fetchPartners = createAsyncThunk(
 
 const initialState = {
     partnersArray: [],
-    isLaoding: true,
+    isLoading: true,
     errMsg: ''
 };
 

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Container, Row } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import { selectCampsiteById } from '../features/campsites/campsitesSlice';
 import CampsiteDetail from '../features/campsites/CampsiteDetail';
@@ -35,7 +35,7 @@ const CampsiteDetailPage = () => {
     return (
         <Container>
             {campsite && <SubHeader current={campsite.name} detail={true} />}
-            <Row>{content}</Row>
+            <Row>{content}</Row> 
         </Container>
     );
 };
